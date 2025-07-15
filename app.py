@@ -4,7 +4,9 @@ from groq import Groq
 
 import os
 
-groq_api_key = os.getenv("GROQ_API_KEY")
+#groq_api_key = os.getenv("GROQ_API_KEY")
+os.environ['GROQ_API_KEY'] = "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"
+
 
 # for cloud ..........
 
@@ -28,11 +30,11 @@ def llama():
 def deepseek():
     return(render_template("deepseek.html"))
 
-@app.route("/deepseek_reply",methods=["GET","POST"])
+@app.route("/deepseek_reply2",methods=["GET","POST"])
 def deepseek_reply():
     q = request.form.get("q")
     # load model
-    client = Groq(api_key=groq_api_key)
+    client = Groq()
     completion = client.chat.completions.create(
         model="deepseek-r1-distill-llama-70b",
         messages=[
@@ -42,7 +44,18 @@ def deepseek_reply():
             }
         ]
     )
-    return(render_template("deepseek_reply.html",r=completion.choices[0].message.content))
+    completion2 = client.chat.completions.create(
+        model="llama-3.1-8b-instant",
+        messages=[
+            {
+                "role": "user",
+                "content": q
+            }
+        ]
+    )
+    return(render_template("deepseek_reply2.html","r=completion.choice[0].message.content", "r2=completion2.choice[0].message.content"));
+
+    #return(render_template("deepseek_reply.html",r=completion.choices[0].message.content))
 
 
 
