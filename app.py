@@ -24,6 +24,28 @@ def main():
 def llama():
     return(render_template("llama.html"))
 
+@app.route("/deepseek",methods=["GET","POST"])
+def deepseek():
+    return(render_template("deepseek.html"))
+
+@app.route("/deepseek_reply",methods=["GET","POST"])
+def deepseek_reply():
+    q = request.form.get("q")
+    # load model
+    client = Groq(api_key=groq_api_key)
+    completion = client.chat.completions.create(
+        model="deepseek-r1-distill-llama-70b",
+        messages=[
+            {
+                "role": "user",
+                "content": q
+            }
+        ]
+    )
+    return(render_template("deepseek_reply.html",r=completion.choices[0].message.content))
+
+
+
 @app.route("/llama_reply",methods=["GET","POST"])
 def llama_reply():
     q = request.form.get("q")
