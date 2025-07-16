@@ -2,13 +2,11 @@ from flask import Flask, render_template, request
 import requests
 import joblib
 from groq import Groq
-
 import os
+
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 groq_api_key = os.getenv("GROQ_API_KEY")
-
-# for cloud ..........
 
 app = Flask(__name__)
 
