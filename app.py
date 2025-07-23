@@ -3,6 +3,9 @@ import requests
 import joblib
 from groq import Groq
 import os
+import sqlite3
+import datetime
+
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
@@ -155,6 +158,28 @@ def stop_telegram():
         status = "Failed to stop the telegram bot. Please check the logs."
     
     return(render_template("telegram.html", status=status))
+
+@app.route("/user_log",methods=["GET","POST"])
+def user_log():
+    #conn = sqlite3.connect("user.db")
+    #c = conn.cursor()
+    #c.execute('''select * from user''')
+    r="Test"
+    #for row in c:
+     # print(row)
+     # r = r + str(row)
+    #c.close()
+    #conn.close()
+    return render_template("user_log.html", r=r)
+
+@app.route("/delete_log",methods=["GET","POST"])
+def delete_log():
+    conn = sqlite3.connect("user.db")
+    cursor = conn.cursor()
+    cursor.execute('DELETE FROM user')
+    conn.commit()
+    conn.close()
+    return render_template("delete_log.html", message="User log deleted successfully.")
 
 if __name__ == "__main__":
     app.run()
