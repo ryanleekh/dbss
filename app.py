@@ -18,6 +18,7 @@ def index():
 def main():
     q = request.form.get("q")
     # db
+    #insert 
     return(render_template("main.html"))
 
 @app.route("/llama",methods=["GET","POST"])
