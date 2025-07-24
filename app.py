@@ -14,6 +14,8 @@ app = Flask(__name__)
 
 @app.route("/",methods=["GET","POST"])
 def index():
+    if(groq_api_key == NULL)
+        return  
     return(render_template("index.html"))
 
 @app.route("/main",methods=["GET","POST"])
@@ -83,7 +85,7 @@ def deepseek_reply():
 def llama_reply():
     q = request.form.get("q")
     # load model
-    client = Groq()
+    client = Groq(groq_api_key)
     completion = client.chat.completions.create(
         model="llama-3.1-8b-instant",
         messages=[
