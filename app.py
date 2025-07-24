@@ -7,8 +7,17 @@ import sqlite3
 import datetime
 from dotenv import load_dotenv
 
+Rend = 0
 
 load_dotenv() 
+
+if os.getenv("RENDER"):
+    print("Running in Render")
+    Rend = 1
+else:
+    Rend = 0
+
+print(Rend)
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
@@ -86,7 +95,11 @@ def deepseek_reply():
 def llama_reply():
     q = request.form.get("q")
     # load model
-    client = Groq()
+    if(Rend ==1):
+        client = Groq(groq_api_key)
+    else:
+        client= Groq()
+        
     completion = client.chat.completions.create(
         model="llama-3.1-8b-instant",
         messages=[
