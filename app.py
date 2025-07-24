@@ -181,6 +181,16 @@ def deletelog():
     conn.close()
     return render_template("deletelog.html", message="User log deleted successfully.")
 
+@app.route("/emotion",methods=["GET","POST"])
+def emotion():
+
+     domain_url = 'https://playhards88-sepia.hf.space'
+     request.post(domain_url)
+
+
+    return render_template("emotion.html", message="")
+
+
 if __name__ == "__main__":
     app.run()
 
