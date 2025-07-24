@@ -69,9 +69,9 @@ def deepseek_reply():
     q = request.form.get("q")
     # load model
        if(Rend ==1):
-        client = Groq(api_key=groq_api_key)
-    else:
-        client= Groq()
+            client = Groq(api_key=groq_api_key)
+        else:
+            client= Groq()
     completion = client.chat.completions.create(
         model="qwen/qwen3-32b",
         messages=[
