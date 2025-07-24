@@ -83,7 +83,7 @@ def deepseek_reply():
 def llama_reply():
     q = request.form.get("q")
     # load model
-    client = Groq(api_key=groq_api_key)
+    client = Groq()
     completion = client.chat.completions.create(
         model="llama-3.1-8b-instant",
         messages=[
