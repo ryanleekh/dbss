@@ -10,7 +10,6 @@ import datetime
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 groq_api_key = os.getenv("GROQ_API_KEY")
-
 app = Flask(__name__)
 
 @app.route("/",methods=["GET","POST"])
