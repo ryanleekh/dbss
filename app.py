@@ -184,7 +184,7 @@ def deletelog():
 @app.route("/emotion",methods=["GET","POST"])
 def emotion():
     domain_url = 'https://playhards88-sepia.hf.space'
-    request.post(domain_url)
+    requests.post(domain_url)
     return render_template("emotion.html", message="")
 
 
